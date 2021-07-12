@@ -1,0 +1,113 @@
+<div class="modal-header border-0 bg-app-theme">
+    <h5 class="modal-title text-app-font">{{appointmentMoreInfo.name}}</h5>
+    <button type="button" ng-click="close()" class="close link-app-font no-underline" data-dismiss="modal" aria-label="{{ 'Close' | translate }}"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="bg-app-theme outer-shadow" ng-if="appointmentMoreInfo.image">
+    <div class="pr-3 pb-3 pl-3">
+        
+    </div>
+</div>
+
+<div class="bg-app-theme outer-shadow">
+    <div class="pr-3 pb-3 pl-3">
+        <div class="row">
+            <div class="col-12 col-sm-5">
+                <div class="bg-white" ng-show="appointmentMoreInfo.image">
+                    <img dir-dynamic-image url="appointmentMoreInfo.image" alt="{{appointmentMoreInfo.title}}" class="img-fluid" ratio="2" />
+                </div>
+            </div>
+            <div class="col-12" ng-class="appointmentMoreInfo.image ? 'col-sm-7' : 'col-sm-12'">
+                <div class="text-app-font bold" ng-show="exhibitorDetails.info">{{exhibitorDetails.info}}</div>
+                <div class="row mtm">
+                    <div class="col-12">
+                        <div class="text-description">{{appointmentMoreInfo.startDateWithTimezone | date: 'shortTime' : 'UTC' }} - {{appointmentMoreInfo.endDateWithTimezone | date: 'shortTime' : 'UTC' }}</div>
+                        <div class="text-description text-capitalize">{{appointmentMoreInfo.startDateWithTimezone | date: 'EEEE, MMMM dd, yyyy' : 'UTC' }}</div>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        <div class="text-center fw-20 mr-2">
+                            <i class="fal fa-map-marker-alt" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="ng-binding"><a ng-click="openLocationOrMap(appointmentMoreInfo)">{{appointmentMoreInfo.location}}</a></div>
+                    <h5 class="pa0 ma0" ng-show="appointmentMoreInfo.location && !appointmentMoreInfo.place">{{appointmentMoreInfo.location}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-body">
+    <div class="mb-2" ng-if="exhibitorDetails.info">
+        <div class="text-justify">{{exhibitorDetails.info}}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h4>{{appointmentMoreInfo.name}}</h4>
+            <h5 class="pa0 ma0" ng-show="appointmentMoreInfo.place"><span ng-click="openLocationOrMap(appointmentMoreInfo)" class="text-app-theme">{{appointmentMoreInfo.location}}</span></h5>
+            <h5 class="pa0 ma0" ng-show="appointmentMoreInfo.location && !appointmentMoreInfo.place">{{appointmentMoreInfo.location}}</h5>
+        </div>
+    </div>
+
+    <div class="appointment-sub-module" ng-if="appointmentMoreInfo.modules.length > 0">
+        <hr />
+        <a href="{{module.fullUrl}}" class="row" alt="{{module.title}}" target="_blank" ng-repeat="module in appointmentMoreInfo.modules">
+            <span class="col-2 column-sub-module-icon">
+                <i class="icon-md icon-{{module.iconKey}}"></i>
+            </span>
+            <span class="col-10">
+                <span class="text-app-theme text-description bold">{{module.title}}</span>
+                <span class="text-description" ng-if="module.description">{{ module.description }}</span>
+            </span>
+        </a>
+    </div>
+
+    <div class="row modal-full-row mtm small" ng-show="appointmentMoreInfo.details || appointmentMoreInfo.speakers.length > 0 || appointmentMoreInfo.documents.length > 0">
+        <uib-tabset active="active" class="more-info-tabs bg-app-theme">
+            <uib-tab index="1" ng-if="appointmentMoreInfo.details">
+                <!-- Details -->
+                <uib-tab-heading>
+                    <uib-tab-title>
+                        <span class="hidden-xs hidden-sm">{{ 'Details' | translate }}</span>
+                        <i class="hidden-md hidden-lg fa-icon-md fas fa-info"></i>
+                    </uib-tab-title>
+                </uib-tab-heading>
+                <div class="row" ng-show="appointmentMoreInfo.details">
+                    <div class="col-12">
+                        <p class="text-justify">{{appointmentMoreInfo.details}}</p>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="2" ng-if="appointmentMoreInfo.speakers.length > 0">
+                <!-- Featured Speakers -->
+                <uib-tab-heading>
+                    <uib-tab-title>
+                        <span class="hidden-xs hidden-sm">{{ 'Speakers' | translate }}</span>
+                        <i class="hidden-md hidden-lg icon-md icon-speakers"></i>
+                    </uib-tab-title>
+                </uib-tab-heading>
+                <div class="row" ng-repeat="speaker in appointmentMoreInfo.speakers">
+                    <div class="col-12">
+                        <div class="details-list-item"><i class="icon icon-speakers"></i><span>{{speaker}}</span></div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="3" ng-if="appointmentMoreInfo.documents.length > 0">
+                <!-- Documents -->
+                <uib-tab-heading>
+                    <uib-tab-title>
+                        <span class="hidden-xs hidden-sm">{{ 'Documents' | translate }}</span>
+                        <i class="hidden-md hidden-lg fa-icon-md far fa-file"></i>
+                    </uib-tab-title>
+                </uib-tab-heading>
+                <div class="row" ng-repeat="document in appointmentMoreInfo.documents">
+                    <div class="col-12">
+                        <a class="details-list-item text-app-theme" href="{{document.url}}" alt="{{document.name}}" target="_blank"><i class="far fa-file"></i>{{document.name}}</a>
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</div>

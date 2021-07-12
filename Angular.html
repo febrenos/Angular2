@@ -1,0 +1,55 @@
+<!-- 
+ng-class = add new class in class
+ng-repeat= loop
+data-toggle=  liga automaticamente o elemento ao tipo correspondente(anterior)
+data-target= destintion btn by id
+role= active btn
+aria-controls= same id inline class 
+aria-selected
+aria-labelledby= rotulado por(id anterior)
+btn-day > btn-times > content
+ -->
+<div class="card no-border mb-4 event-module">
+    <div ng-include="'/app/event/modules/moduleHeader.html'"></div>
+    <div class="card-body">
+        <div class="d-flex justify-content-md-center">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <!-- day -->
+                <div type="button" id="tab-day-{{ scheduleDay.date | date: 'MMdd' : 'UTC' }}" class="nav-link" ng-class="{'active' : $first}" ng-repeat="scheduleDay in moduleView.scheduleDays" data-toggle="pill" data-target="#content-day-{{ scheduleDay.date | date: 'MMdd' : 'UTC' }}" role="tab" aria-controls="tab-day-{{ scheduleDay.date | date: 'MMdd' : 'UTC' }}" aria-selected="{{ $index == 0 ? "true" : "false" }}">{{ scheduleDay.date | date: 'MMM d' : 'UTC' }}</div>
+            </div>
+            <div class="tab-content">
+                <!-- rendering -->
+                <div id="content-day-{{ scheduleDay.date | date: 'MMdd' : 'UTC' }}"c class="tab-pane fade" ng-class="{'show active' : $first}" ng-repeat="scheduleDay in moduleView.scheduleDays" role="tabpanel" aria-labelledby="tab-day-{{ scheduleDay.date | date: 'MMdd' : 'UTC' }}">
+                    <!-- time -->
+                    <nav>
+                        <div class="nav nav-tabs" role="tablist">
+                            <button type="button" id="tab-time-{{appointment.id}}" class="nav-link text-uppercase list-unstyled" ng-class="{'active' : $first}" ng-repeat="appointment in scheduleDay.appointments" data-toggle="tab" data-target="#content-time-{{appointment.id}}" role="tab" aria-controls="tab-time-{{appointment.id}}" aria-selected="{{ $index == 0 ? "true" : "false" }}">{{ appointment.startDateWithTimezone | date: 'shortTime' : 'UTC'}}</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content">
+                        <div id="content-time-{{appointment.id}}" class="tab-pane fade" ng-class="{'show active' : $first}" ng-repeat="appointment in scheduleDay.appointments" role="tabpanel" aria-labelledby="#tab-time-{{appointment.id}}">
+                            {{ appointment.startDateWithTimezone | date: 'shortTime' : 'UTC'}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--ng-repeat="appointment in scheduleDay.appointments"-->
+<!--<div>{{ scheduleDay.date | date: 'MMM d' : 'UTC' }}</div>
+<div>{{ scheduleDay.appointments[0].startDateWithTimezone | date: 'shortTime' : 'UTC' }}</div>
+<div>{{ scheduleDay.appointments[0].endDateWithTimezone | date: 'shortTime' : 'UTC' }}</div>
+<span>{{ scheduleDay.appointments[0].name }}.</span>
+<span><span>{{ 'MoreInfo' | translate }}</span> <i class="fa fa-caret-down"></i></span>-->
+<!--<a ng-click="openAppointment(appointment)">
+    <div>{{ appointment.startDateWithTimezone | date: 'shortTime' : 'UTC'}}</div>
+    <div>{{ appointment.endDateWithTimezone | date: 'shortTime' : 'UTC' }}</div>
+    <span>{{appointment.name}}</span>
+    <span>{{appointment.location}}</span>
+</a>-->
+
+
+<!-- 189065660 -->
