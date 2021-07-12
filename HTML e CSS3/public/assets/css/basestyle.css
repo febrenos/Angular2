@@ -1,0 +1,46 @@
+/*
+h1
+{
+    font-size: 300%;
+    text-align: center;
+}
+body
+{
+    background-color:darkgray;
+}
+p
+{
+    background-color: powderblue;
+    text-align: center;
+    border: 2px solid black;
+}
+pre:hover, p:hover
+{
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+/*on mouse click element*/ 
+/*
+a:active 
+{
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+.mainarea
+{ 
+    background-color: red;
+    
+}
+.mainarea:hover
+{
+    background-color: salmon;
+}
+.baseiframe
+{
+    width: fit-content;
+    height: fit-content;
+}
+*/
+/*on mouse pass throught element*/ 
