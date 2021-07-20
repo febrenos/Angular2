@@ -1,0 +1,47 @@
+<div class="dropdown" ng-show="hasHeaderNotification">
+    <button type="button" id="notificationButton{{$id}}" ng-click="openHeader($id)" class="btn btn-link no-underline p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="icon-wrapper icon-wrapper-alt rounded-circle">
+            <span class="icon-wrapper-bg bg-app-font"></span>
+            <i class="fas fa-bells text-app-font" aria-hidden="true"></i>
+        </span>
+    </button>
+
+    <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-xl dropdown-menu-right rm-pointers" x-placement="bottom-end">
+        <div class="ev-notification-header">
+            <perfect-scrollbar class="scrollbar-sidebar" wheel-propagation="false" wheel-speed="2" min-scrollbar-length="20">
+                <div class="ev-notification-item" ng-repeat="notification in notificationsList | limitTo: 10" ng-if="!loading">
+                    <a ng-click="openNotification(notification)" class="d-flex link-app-theme no-underline">
+                        <div class="flex-grow-1">
+                            <div class="mr-4">
+                                <div class="notification-title">{{ notification.title }}</div>
+                                <div>{{ notification.text | limitTo: 55 }}{{notification.text.length > 55 ? '...' : ''}}</div>
+                                <small>{{ notification.startDate | gmtDate: notification.timezoneId | socialDate }}</small>
+                            </div>
+                        </div>
+
+                        <div ng-if="notification.image.url">
+                            <div class="notification-image">
+                                <img dir-dynamic-image ng-src="{{ notification.image.url }}" class="img-fluid" title="{{ notification.title }}" alt="{{ notification.title }}" ratio="2" />
+                            </div>
+                        </div>
+                    </a>
+                    <div class="divider" ng-if="!$last"></div>
+                </div>
+
+                <div ng-if="loading">
+                    <div class="notification-skeleton-loading"></div>
+                    <div class="notification-skeleton-loading"></div>
+                    <div class="notification-skeleton-loading"></div>
+                    <div class="notification-skeleton-loading"></div>
+                </div>
+            </perfect-scrollbar>
+        </div>
+
+        <ul class="nav flex-column">
+            <li class="nav-item-divider nav-item"></li>
+            <li class="nav-item-btn text-center nav-item">
+                <button ng-click="viewAllNotifications()" class="btn btn-sm btn-app-alternate btn-wide">{{ 'ViewAll' | translate }}</button>
+            </li>
+        </ul>
+    </div>
+</div>
