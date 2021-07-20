@@ -86,6 +86,7 @@
                             appendTo: $('.event-page'),
                             templateUrl: '/app/event/modules/notifications/notificationDetails.html',
                             controller: ['$uibModalInstance', '$scope', function ($uibModalInstance, $scope) {
+                                //$scope informação entre os domínios de um controller 
                                 $scope.close = function () {
                                     $uibModalInstance.dismiss('cancel');
                                 }
