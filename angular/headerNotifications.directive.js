@@ -1,17 +1,19 @@
 // name function 
 (function (currentPath) {
-    // directive declaration ('directive name', [class usaded usando injetor de dependencia])
+    // directive declaration ('directive name', [class used, using dependencia injector])
     app.directive('headerNotifications', ['$routeParams', 'moduleService', 'modalService', '$resource',
         function ($routeParams, moduleService, modalService, $resource) {
             return {
                 //div by Elemente 'EA' (Element or Atribute)
                 restrict: 'E',
-                //By user
+                //By user(for identificate)
                 scope: {
                     moduleId: '='
+                    //moduleList: '=', Ligações
+                    //eventId: '@', Atributos
                 },
                 replace: true,
-                // Replate .js file name on path to u html can pass write a html
+                // Replate .js file name on path to html or can pass write a html
                 templateUrl: currentPath.replace('headerNotifications.directive.js', 'headerNotifications.html'),
                 //Controler class(declaration)
                 controller: function () { },
@@ -20,7 +22,7 @@
 
                     // new array
                     scope.notificationsList = [];
-                    //
+                    //initializate loading like false
                     scope.loading = false;
 
                     //is var !undefined? after use an class to show

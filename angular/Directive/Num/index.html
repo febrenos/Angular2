@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="directive.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="firstCtrl">
+        <h3>First controller</h3>
+        <a href = "#/"> #/</a>
+        <p>Click one of the numbers below:</p>
+        <ul>
+            <li ng-repeat = "number in numbers">
+                 <a href = "#/numbers/{{number}}">{{number}}</a>
+            </li>
+        </ul>
+      
+    </div>
+    <hr>
+    <div ng-controller="secondCtrl">
+        <h3>Second controller</h3>
+        <p>Current path: {{current_path}}</p>
+        <span my-dir="exp"></span>
+        Number clicked in first controller: <b>{{number}}</b>
+        <button my-dir>Test</button>
+    </div>
+</body>
+
+</html>

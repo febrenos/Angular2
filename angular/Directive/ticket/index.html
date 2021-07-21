@@ -1,0 +1,14 @@
+<div ng-show="hasHeaderRegister">
+    <div ng-show="!hasMultipleRegisters">
+        <a ng-href="/events/{{eventId}}/subscription/{{moduleList[0].id}}" class="btn btn-lg btn-app-font btn-wide btn-shadow fsize-1" title="{{moduleService.getTitleByUser('', moduleList[0])}}" target="_blank" tabindex="0"><i class="icon icon-{{moduleList[0].moduleIcon.valueWEB}} mr-2"></i><span>{{moduleService.getTitleByUser('', moduleList[0])}}</span></a>
+    </div>
+
+    <div ng-show="hasMultipleRegisters">
+        <div class="dropdown d-inline-block">
+            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="btn btn-lg btn-app-font btn-wide btn-shadow fsize-1 dropdown-toggle"><i class="far fa-ticket-alt mr-2" aria-hidden="true"></i>{{ 'Register' | translate }}</button>
+            <div class="dropdown-menu" role="menu" tabindex="-1" aria-hidden="true" x-placement="bottom-start">
+                <a ng-href="/events/{{eventId}}/subscription/{{module.id}}" class="dropdown-item" title="{{moduleService.getTitleByUser('', module)}}" target="_blank" tabindex="0" ng-repeat="module in moduleList"><i class="dropdown-icon icon icon-{{module.moduleIcon.valueWEB}}"></i><span>{{moduleService.getTitleByUser('', module)}}</span></a>
+            </div>
+        </div>
+    </div>
+</div>
